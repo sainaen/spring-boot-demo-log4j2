@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <Property name="STACKTRACE_FILTER">sun.reflect,org.apache.tomcat,org.apache.coyote,org.apache.catalina,org.apache.jasper,javax.servlet.http</Property>
+        <Property name="EXCEPTION_PATTERN">%xEx{filters(${STACKTRACE_FILTER})}</Property>
+        <Property name="STDOUT_INFO_PATTERN">%d{ISO8601}{GMT} [Thread ID=%threadId] </Property>
+        <Property name="STDOUT_PATTERN">${STDOUT_INFO_PATTERN} %-5level %c{1.} - %msg</Property>
+        <Property name="GENERAL_PATTERN">${STDOUT_PATTERN}%n${EXCEPTION_PATTERN}</Property>
+    </Properties>
+    <Appenders>
+        <Console name="GENERAL_STDOUT" follow="true">
+            <PatternLayout pattern="${GENERAL_PATTERN}"/>
+        </Console>
+        <Async name="GENERAL">
+            <AppenderRef ref="GENERAL_STDOUT"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="GENERAL"/>
+        </Root>
+    </Loggers>
+</Configuration>
